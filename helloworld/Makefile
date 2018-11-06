@@ -1,14 +1,14 @@
 .PHONY: all
 all: .helloworld
 
-REV=a000001
+REV := $(shell git log --max-count=1 --pretty="format:%h" HEAD)
 
 .helloworld: helloworld-linux-amd64 Dockerfile
-	docker build -t quay.io/weaveworks/helloworld:master-${REV} .
+	docker build -t sebidude/helloworld:master-$(REV) .
 	touch $@
 
 helloworld-linux-amd64: helloworld.go
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-X main.rev=${REV}" -o $@ $*
+	env GOOS=linux GOARCH=amd64 go build -ldflags="-X main.rev=$(REV)" -o $@ $*
 
 .PHONY: clean
 clean:
