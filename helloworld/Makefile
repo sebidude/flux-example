@@ -8,7 +8,7 @@ REV := $(shell git log --max-count=1 --pretty="format:%h" HEAD)
 	touch $@
 
 helloworld-linux-amd64: helloworld.go
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-X main.rev=$(REV)" -o $@ $*
+	env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags='-extldflags "-static" -d -s -w -X main.rev=$(REV)' -o $@ $*
 
 .PHONY: clean
 clean:
