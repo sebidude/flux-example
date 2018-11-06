@@ -1,14 +1,15 @@
 .PHONY: all
 all: .helloworld
 
-REV := $(shell git log --max-count=1 --pretty="format:%h" HEAD)
+VERSION := 1.0.1
 
 .helloworld: helloworld-linux-amd64 Dockerfile
-	docker build -t sebidude/helloworld:master-$(REV) .
+	docker build -t sebidude/helloworld:$(VERSION) .
 	touch $@
+	docker push sebidude/helloworld:$(VERSION)
 
 helloworld-linux-amd64: helloworld.go
-	env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags='-extldflags "-static" -d -s -w -X main.rev=$(REV)' -o $@ $*
+	env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags='-extldflags "-static" -d -s -w -X main.rev=$(VERSION)' -o $@ $*
 
 .PHONY: clean
 clean:
