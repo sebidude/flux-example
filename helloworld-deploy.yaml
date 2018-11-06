@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: sebidude/helloworld:1.0.2
+        image: sebidude/helloworld
         args:
         - -msg=Ahoy
         ports:
