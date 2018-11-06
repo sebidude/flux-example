@@ -1,0 +1,1 @@
+{"jobID":"9b937703-a03c-1188-d512-bd3339e10651","spec":{"type":"policy","cause":{"Message":"","User":"Sebastian Stauch \u003cbugsteinpeter@gmail.com\u003e"},"spec":{"default:deployment/helloworld":{"add":{"automated":"true"},"remove":{}}}},"result":null}
